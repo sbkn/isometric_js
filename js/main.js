@@ -61,7 +61,9 @@ var canvas = document.getElementById("myCanvas");
 	
 	function readTextFile(file)
 	{
-		window.open(file);
+		$.get(file, function(data){
+			console.log(data);
+		});
 	}
 	
 	
@@ -113,9 +115,8 @@ var canvas = document.getElementById("myCanvas");
 					ctx.closePath();
 				}
 				
-				//iso_grid_spooky.onload = function() {
-					ctx.drawImage(iso_grid_spooky, 69, 50);
-				//};
+				// Draw the grid
+				ctx.drawImage(iso_grid_spooky, 69, 50);
 			}
 		}
 	}
