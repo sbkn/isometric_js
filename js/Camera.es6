@@ -32,5 +32,10 @@ class Camera {
 		this._x = x-canvas.width/2;
 		this._y = y-canvas.height/2;
 	}
+	// Reset the View
+	resetView() {
+		this._x = 64;
+		this._y = 64;
+	}
 }
 

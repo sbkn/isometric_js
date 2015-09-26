@@ -32,16 +32,18 @@ function resizeCanvas() {
 
 // Draw the terrain
 function drawGround() {
+	var x = 0;
+	var y = 0;
 	for(var i=0; i<window.levelHeight; i++) {
 		for(var j=0; j<window.levelWidth; j++) {
 			// Draw the ground and the obstacles
 			if(window.gamemap[i][j] == 0) {
-				var x = (j-i)*(window.tileWidth*window.scalingFac/2)-(window.tileWidth*window.scalingFac/2)+window.cam.x; 
-				var y = (j+i)*(window.tileHeight*window.scalingFac/2)-32*window.scalingFac+window.heightmap[i][j]+window.cam.y;
+				x = (j-i)*(window.tileWidth*window.scalingFac/2)-(window.tileWidth*window.scalingFac/2)+window.cam.x;
+				y = (j+i)*(window.tileHeight*window.scalingFac/2)-32*window.scalingFac+window.heightmap[i][j]+window.cam.y;
 				ctx.drawImage(iso_grid_spooky, x, y, 64*window.scalingFac, 64*window.scalingFac);
 			} else {
-				var x = (j-i)*(window.tileWidth*window.scalingFac/2)-(window.tileWidth*window.scalingFac/2)+window.cam.x; 
-				var y = (j+i)*(window.tileHeight*window.scalingFac/2)-64*window.scalingFac+window.heightmap[i][j]+window.cam.y;
+				x = (j-i)*(window.tileWidth*window.scalingFac/2)-(window.tileWidth*window.scalingFac/2)+window.cam.x;
+				y = (j+i)*(window.tileHeight*window.scalingFac/2)-64*window.scalingFac+window.heightmap[i][j]+window.cam.y;
 				ctx.drawImage(iso_obstacle_spooky_box_closed, x, y, 64*window.scalingFac, 96*window.scalingFac);
 			}
 		}

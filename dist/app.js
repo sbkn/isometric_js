@@ -9260,7 +9260,7 @@ function readHeightmapFile(file) {
 function init() {
 	readMapFile("./Content/gamefile.txt");
 	readHeightmapFile("./Content/heightmap.txt");
-	var cam = new Camera(0, 0, 15);
+	var cam = new Camera(64, 64, 15);
 	window.cam = cam;
 	var ghost = new Ghost(64, 64, 2, 2, 6, 4, 100);
 	window.ghost = ghost;
@@ -9358,6 +9358,14 @@ var Camera = (function () {
 		value: function centerView(x, y) {
 			this._x = x - canvas.width / 2;
 			this._y = y - canvas.height / 2;
+		}
+
+		// Reset the View
+	}, {
+		key: "resetView",
+		value: function resetView() {
+			this._x = 0;
+			this._y = 0;
 		}
 	}, {
 		key: "x",
@@ -9517,16 +9525,18 @@ function resizeCanvas() {
 
 // Draw the terrain
 function drawGround() {
+	var x = 0;
+	var y = 0;
 	for (var i = 0; i < window.levelHeight; i++) {
 		for (var j = 0; j < window.levelWidth; j++) {
 			// Draw the ground and the obstacles
 			if (window.gamemap[i][j] == 0) {
-				var x = (j - i) * (window.tileWidth * window.scalingFac / 2) - window.tileWidth * window.scalingFac / 2 + window.cam.x;
-				var y = (j + i) * (window.tileHeight * window.scalingFac / 2) - 32 * window.scalingFac + window.heightmap[i][j] + window.cam.y;
+				x = (j - i) * (window.tileWidth * window.scalingFac / 2) - window.tileWidth * window.scalingFac / 2 + window.cam.x;
+				y = (j + i) * (window.tileHeight * window.scalingFac / 2) - 32 * window.scalingFac + window.heightmap[i][j] + window.cam.y;
 				ctx.drawImage(iso_grid_spooky, x, y, 64 * window.scalingFac, 64 * window.scalingFac);
 			} else {
-				var x = (j - i) * (window.tileWidth * window.scalingFac / 2) - window.tileWidth * window.scalingFac / 2 + window.cam.x;
-				var y = (j + i) * (window.tileHeight * window.scalingFac / 2) - 64 * window.scalingFac + window.heightmap[i][j] + window.cam.y;
+				x = (j - i) * (window.tileWidth * window.scalingFac / 2) - window.tileWidth * window.scalingFac / 2 + window.cam.x;
+				y = (j + i) * (window.tileHeight * window.scalingFac / 2) - 64 * window.scalingFac + window.heightmap[i][j] + window.cam.y;
 				ctx.drawImage(iso_obstacle_spooky_box_closed, x, y, 64 * window.scalingFac, 96 * window.scalingFac);
 			}
 		}
@@ -9656,6 +9666,10 @@ function keyDownHandler(e) {
 	else if (e.keyCode == 40 || e.keyCode == 83) {
 			downPressed = true;
 		}
+	// key R - reset the camera offset
+	if (e.keyCode == 82) {
+		window.cam.resetView();
+	}
 }
 function keyUpHandler(e) {
 	if (e.keyCode == 39 || e.keyCode == 68) {

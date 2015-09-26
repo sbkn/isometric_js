@@ -44,6 +44,10 @@ function keyDownHandler(e) {
 	else if(e.keyCode == 40 || e.keyCode == 83) {
 		downPressed = true;
 	}
+	// key R - reset the camera offset
+	if(e.keyCode == 82) {
+		window.cam.resetView();
+	}
 }
 function keyUpHandler(e) {
 	if(e.keyCode == 39 || e.keyCode == 68) {

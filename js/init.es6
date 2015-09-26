@@ -46,7 +46,7 @@ function readHeightmapFile(file)
 function init(){
 	readMapFile( "./Content/gamefile.txt" );
 	readHeightmapFile( "./Content/heightmap.txt" );
-	let cam = new Camera(0, 0, 15);
+	let cam = new Camera(64, 64, 15);
 	window.cam = cam;
 	let ghost = new Ghost(64, 64, 2, 2, 6, 4, 100);
 	window.ghost = ghost;
