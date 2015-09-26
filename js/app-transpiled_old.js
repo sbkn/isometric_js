@@ -473,4 +473,4 @@ function touchMove(e) {
 	window.touchDistY = parseInt(touchObj.clientY) - touchStartY;
 	e.preventDefault();
 }
-//# sourceMappingURL=app-transpiled.js.map
+//# sourceMappingURL=app-transpiled_old.js.map

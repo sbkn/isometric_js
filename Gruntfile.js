@@ -9,12 +9,7 @@ module.exports = function (grunt) {
 
 		srcFiles = [
 			"js/common/_begin.es6",
-			"js/Camera.js",
-			"js/Ghost.js",
-			"js/Point.js",
-			"js/init.js",
-			"js/main.js",
-			"js/input.js",
+			"js/*.es6",
 			"js/common/_end.es6"
 		],
 
@@ -54,7 +49,7 @@ module.exports = function (grunt) {
 		},
 
 		eslint: {
-			target: ["dist/app-concat.es6",
+			target: ["js/*.es6",
 				"Gruntfile.js"]
 		},
 
@@ -105,7 +100,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-watch");
 		
 	// concat mycode, lint, transpile, concat with libs, concat css, minify
-	grunt.registerTask("build", ["concat:mycode", "babel", "concat:allcode", "concat:css", "uglify"]);
+	grunt.registerTask("build", ["eslint", "concat:mycode", "babel", "concat:allcode", "concat:css", "uglify"]);
 
 	grunt.registerTask("default", ["build", "watch"]);
 };

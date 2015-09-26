@@ -19,7 +19,7 @@ class Point {
 		this._matX = matX;
 	}
 	set matY(matY) {
-		this._matX = matY;
+		this._matY = matY;
 	}
 	get pxX() {
 		return this._pxX;
@@ -31,7 +31,7 @@ class Point {
 		this._pxX = pxX;
 	}
 	set pxY(pxY) {
-		this._pxX = pxY;
+		this._pxY = pxY;
 	}
 
 	// matrix -> px

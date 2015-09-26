@@ -1,7 +1,7 @@
 {
-  "name": "dockertest2",
-  "version": "0.1.1",
-  "description": "A Docker test.",
+  "name": "Ghosts!",
+  "version": "0.0.1",
+  "description": "An isometric game",
   "main": "main.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

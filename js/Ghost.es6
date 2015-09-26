@@ -1,3 +1,4 @@
+var test;
 
 // It's a ghost !
 class Ghost {

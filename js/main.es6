@@ -14,6 +14,7 @@ window.addEventListener('resize', resizeCanvas, false);
 
 // Time keeper
 var time;
+var test;
 
 // Images
 var iso_grid_spooky = new Image();
