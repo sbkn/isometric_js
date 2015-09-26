@@ -40,7 +40,6 @@ function keyDownHandler(e) {
 	if(e.keyCode == 38 || e.keyCode == 87) {
 		upPressed = true;
 	}
-	// REMOVE ME
 	// down arrow and S
 	else if(e.keyCode == 40 || e.keyCode == 83) {
 		downPressed = true;
