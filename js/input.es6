@@ -28,30 +28,34 @@ function clickHandler(e) {
 }
 
 function keyDownHandler(e) {
-	if(e.keyCode == 39) {
+	// right arrow and D
+	if(e.keyCode == 39 || e.keyCode == 68) {
 		rightPressed = true;
 	}
-	else if(e.keyCode == 37) {
+	// left arrow and A
+	else if(e.keyCode == 37 || e.keyCode == 65) {
 		leftPressed = true;
 	}
-	if(e.keyCode == 38) {
+	// up arrow and W
+	if(e.keyCode == 38 || e.keyCode == 87) {
 		upPressed = true;
 	}
-	else if(e.keyCode == 40) {
+	// down arrow and S
+	else if(e.keyCode == 40 || e.keyCode == 83) {
 		downPressed = true;
 	}
 }
 function keyUpHandler(e) {
-	if(e.keyCode == 39) {
+	if(e.keyCode == 39 || e.keyCode == 68) {
 		rightPressed = false;
 	}
-	else if(e.keyCode == 37) {
+	else if(e.keyCode == 37 || e.keyCode == 65) {
 		leftPressed = false;
 	}
-	if(e.keyCode == 38) {
+	if(e.keyCode == 38 || e.keyCode == 87) {
 		upPressed = false;
 	}
-	else if(e.keyCode == 40) {
+	else if(e.keyCode == 40 || e.keyCode == 83) {
 		downPressed = false;
 	}
 }
