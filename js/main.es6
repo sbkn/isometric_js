@@ -11,7 +11,7 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 window.addEventListener('resize', resizeCanvas, false);
-// REMOVE THIS COMMENT
+
 // Time keeper
 var time;
 var test;
