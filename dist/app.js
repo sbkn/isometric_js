@@ -9240,7 +9240,10 @@ function readMapFile(file) {
 	});
 }
 
-// Read in the heightmap
+/**
+ * Reads in the height map file which is a matrix with the same dimensions as the map file
+ * @param file the heightmap file
+ */
 function readHeightmapFile(file) {
 	$.get(file, function (data) {
 		var map = data.split("\n");
@@ -9364,8 +9367,8 @@ var Camera = (function () {
 	}, {
 		key: "resetView",
 		value: function resetView() {
-			this._x = 0;
-			this._y = 0;
+			this._x = 64;
+			this._y = 64;
 		}
 	}, {
 		key: "x",

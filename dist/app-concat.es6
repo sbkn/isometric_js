@@ -23,8 +23,11 @@ function readMapFile(file)
 		window.gamemap = map;
 	});
 }
-	
-// Read in the heightmap
+
+/**
+ * Reads in the height map file which is a matrix with the same dimensions as the map file
+ * @param file the heightmap file
+ */
 function readHeightmapFile(file)
 {
 	$.get(file, function(data){
@@ -140,8 +143,8 @@ class Camera {
 	}
 	// Reset the View
 	resetView() {
-		this._x = 0;
-		this._y = 0;
+		this._x = 64;
+		this._y = 64;
 	}
 }
 
