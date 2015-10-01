@@ -8,6 +8,11 @@
   },
   "author": "Sergey Bakin",
   "license": "ISC",
+  "repository" :
+  {
+    "type" : "git",
+    "url" : "https://github.com/sbkn/isometric_js"
+  },
   "dependencies": {
     "grunt": "^0.4.5",
     "grunt-babel": "^5.0.1",
@@ -15,6 +20,8 @@
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^15.0.0",
+    "grunt-jsdoc":"^0.6.10",
+    "grunt-esdoc":"^0.0.1",
     "jquery": "^2.1.4"
   }
 }
