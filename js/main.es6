@@ -29,11 +29,10 @@ window.mousePointer = new Point(0, 0);
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-window.addEventListener('resize', resizeCanvas, false);
+window.addEventListener("resize", resizeCanvas, false);
 
 // Time keeper
 var time;
-var test;
 
 // Images
 var isoGridSpooky = new Image();
@@ -171,7 +170,7 @@ function draw() {
         }
     }
     // Move the cam
-    if (dx != 0 || dy != 0) {
+    if (dx !== 0 || dy !== 0) {
         window.cam.moveView(dx, dy);
     }
 
@@ -184,4 +183,4 @@ init();
 // Resize canvas
 resizeCanvas();
 // Start loop
-draw();	
+draw();

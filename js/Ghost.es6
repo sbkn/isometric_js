@@ -1,6 +1,6 @@
-var test;
-
-// It's a ghost !
+/**
+ * It's a ghost !
+ */
 class Ghost {
     // framesCols = total columns of frames, framesRows = total rows of frames on the sheet
     // animSpeed = delay for frame jumps

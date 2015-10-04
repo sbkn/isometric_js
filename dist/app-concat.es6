@@ -164,9 +164,9 @@ class Point {
 
 
 
-var test;
-
-// It's a ghost !
+/**
+ * It's a ghost !
+ */
 class Ghost {
     // framesCols = total columns of frames, framesRows = total rows of frames on the sheet
     // animSpeed = delay for frame jumps
@@ -278,11 +278,10 @@ window.mousePointer = new Point(0, 0);
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-window.addEventListener('resize', resizeCanvas, false);
+window.addEventListener("resize", resizeCanvas, false);
 
 // Time keeper
 var time;
-var test;
 
 // Images
 var isoGridSpooky = new Image();
@@ -420,7 +419,7 @@ function draw() {
         }
     }
     // Move the cam
-    if (dx != 0 || dy != 0) {
+    if (dx !== 0 || dy !== 0) {
         window.cam.moveView(dx, dy);
     }
 
@@ -433,7 +432,7 @@ init();
 // Resize canvas
 resizeCanvas();
 // Start loop
-draw();	
+draw();
 
 // This handles the user input
 
@@ -464,37 +463,37 @@ function clickHandler(e) {
 
 function keyDownHandler(e) {
     // right arrow and D
-    if (e.keyCode == 39 || e.keyCode == 68) {
+    if (e.keyCode === 39 || e.keyCode === 68) {
         rightPressed = true;
     }
     // left arrow and A
-    else if (e.keyCode == 37 || e.keyCode == 65) {
+    else if (e.keyCode === 37 || e.keyCode === 65) {
         leftPressed = true;
     }
     // up arrow and W
-    if (e.keyCode == 38 || e.keyCode == 87) {
+    if (e.keyCode === 38 || e.keyCode === 87) {
         upPressed = true;
     }
     // down arrow and S
-    else if (e.keyCode == 40 || e.keyCode == 83) {
+    else if (e.keyCode === 40 || e.keyCode === 83) {
         downPressed = true;
     }
     // key R - reset the camera offset
-    if (e.keyCode == 82) {
+    if (e.keyCode === 82) {
         window.cam.resetView();
     }
 }
 function keyUpHandler(e) {
-    if (e.keyCode == 39 || e.keyCode == 68) {
+    if (e.keyCode === 39 || e.keyCode === 68) {
         rightPressed = false;
     }
-    else if (e.keyCode == 37 || e.keyCode == 65) {
+    else if (e.keyCode === 37 || e.keyCode === 65) {
         leftPressed = false;
     }
-    if (e.keyCode == 38 || e.keyCode == 87) {
+    if (e.keyCode === 38 || e.keyCode === 87) {
         upPressed = false;
     }
-    else if (e.keyCode == 40 || e.keyCode == 83) {
+    else if (e.keyCode === 40 || e.keyCode === 83) {
         downPressed = false;
     }
 }
