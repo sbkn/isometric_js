@@ -222,15 +222,28 @@ class Ghost {
 }
 
 
-// Scaling factor - scale the pixmaps up
+/**
+ * // Scaling factor - scale the pixmaps up
+ * @type {number}
+ */
 window.scalingFac = 2;
-// tilewidth & height of the default tile
+/**
+ *  tilewidth & height of the default tile
+ * @type {number}
+ */
 window.tileWidth = 64;
 window.tileHeight = 32;
-// Coord's of a click
-window.clickX = 0; 
+/**
+ * Coord's of a click
+ * @type {number}
+ */
+window.clickX = 0;
 window.clickY = 0;
-// Canvas
+
+/**
+ * Canvas
+ * @type {Element}
+ */
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
@@ -243,18 +256,24 @@ var test;
 // Images
 var iso_grid_spooky = new Image();
 var iso_obstacle_spooky_box_closed = new Image();
+var iso_highlighted_grid = new Image();
 var ghostImage = new Image();
 iso_grid_spooky.src = './Content/iso_grid_spooky.png';
 iso_obstacle_spooky_box_closed.src = './Content/iso_obstacle_spooky_box_closed.png';
+iso_highlighted_grid.src = './Content/iso_highlighted_grid.png';
 ghostImage.src = './Content/ghost_2.png';
 
-// Resize the canvas when needed
+/**
+ * Resize the canvas when needed
+ */
 function resizeCanvas() {
 	window.innerWidth <= 800 ? canvas.width = window.innerWidth : canvas.width = 800;
 	window.innerHeight <= 640 ? canvas.height = window.innerHeight : canvas.height = 640;
 }
 
-// Draw the terrain
+/**
+ * Draw the terrain
+ */
 function drawGround() {
 	var x = 0;
 	var y = 0;
@@ -272,8 +291,16 @@ function drawGround() {
 			}
 		}
 	}
+    ctx.drawImage(iso_highlighted_grid, window.pointerX, window.pointerY, 64*window.scalingFac, 32*window.scalingFac);
 }
-// Draw a number at (x,y)
+
+/**
+ * Draw a number at (x,y)
+ * @param title
+ * @param num
+ * @param x
+ * @param y
+ */
 function drawNumber(title, num, x, y) {
 	ctx.font = "16px Arial";
 	ctx.fillStyle = "#FA58FA";
@@ -376,6 +403,8 @@ var touchStartX = 0;
 var touchStartY = 0;
 window.touchDistX = 0;
 window.touchDistY = 0;
+window.pointerX = 0;
+window.pointerY = 0;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -384,75 +413,79 @@ document.addEventListener("touchstart", touchDown, false);
 document.addEventListener("touchend", touchUp, false);
 document.addEventListener("touchmove", touchMove, false);
 
-canvas.addEventListener( "click", clickHandler, false );
+canvas.addEventListener("click", clickHandler, false);
 
 // CARE - this only works for the current position / sizing of canvas!
 function clickHandler(e) {
-	window.clickX = e.pageX - (window.innerWidth - canvas.width)/2 - window.cam.x;
-	window.clickY = e.pageY - window.cam.y;
+    window.clickX = e.pageX - (window.innerWidth - canvas.width) / 2 - window.cam.x;
+    window.clickY = e.pageY - window.cam.y;
 //	window.clickX = e.pageX - window.cam.x;
 //	window.clickY = e.pageY - window.cam.y;
 }
 
 function keyDownHandler(e) {
-	// right arrow and D
-	if(e.keyCode == 39 || e.keyCode == 68) {
-		rightPressed = true;
-	}
-	// left arrow and A
-	else if(e.keyCode == 37 || e.keyCode == 65) {
-		leftPressed = true;
-	}
-	// up arrow and W
-	if(e.keyCode == 38 || e.keyCode == 87) {
-		upPressed = true;
-	}
-	// down arrow and S
-	else if(e.keyCode == 40 || e.keyCode == 83) {
-		downPressed = true;
-	}
-	// key R - reset the camera offset
-	if(e.keyCode == 82) {
-		window.cam.resetView();
-	}
+    // right arrow and D
+    if (e.keyCode == 39 || e.keyCode == 68) {
+        rightPressed = true;
+    }
+    // left arrow and A
+    else if (e.keyCode == 37 || e.keyCode == 65) {
+        leftPressed = true;
+    }
+    // up arrow and W
+    if (e.keyCode == 38 || e.keyCode == 87) {
+        upPressed = true;
+    }
+    // down arrow and S
+    else if (e.keyCode == 40 || e.keyCode == 83) {
+        downPressed = true;
+    }
+    // key R - reset the camera offset
+    if (e.keyCode == 82) {
+        window.cam.resetView();
+    }
 }
 function keyUpHandler(e) {
-	if(e.keyCode == 39 || e.keyCode == 68) {
-		rightPressed = false;
-	}
-	else if(e.keyCode == 37 || e.keyCode == 65) {
-		leftPressed = false;
-	}
-	if(e.keyCode == 38 || e.keyCode == 87) {
-		upPressed = false;
-	}
-	else if(e.keyCode == 40 || e.keyCode == 83) {
-		downPressed = false;
-	}
+    if (e.keyCode == 39 || e.keyCode == 68) {
+        rightPressed = false;
+    }
+    else if (e.keyCode == 37 || e.keyCode == 65) {
+        leftPressed = false;
+    }
+    if (e.keyCode == 38 || e.keyCode == 87) {
+        upPressed = false;
+    }
+    else if (e.keyCode == 40 || e.keyCode == 83) {
+        downPressed = false;
+    }
 }
 
 function mouseMoveHandler(e) {
-	var relativeX = e.clientX - canvas.offsetLeft;
-	if(relativeX > 0 && relativeX < canvas.width) {
-		//paddleX = relativeX - paddleWidth/2;
-	}
+    var relativeX = e.clientX - canvas.offsetLeft;
+    var relativeY = e.clientY - canvas.offsetTop;
+    if (relativeX > 0 && relativeX < canvas.width) {
+        if (relativeY > 0 && relativeY < canvas.height) {
+            window.pointerX = relativeX;
+            window.pointerY = relativeY;
+        }
+    }
 }
 // Handle the touch events
 function touchDown(e) {
-	var touchObj = e.changedTouches[0]; // reference first touch point
-	touchStartX = parseInt(touchObj.clientX); // get x position of touch point relative to left edge of browser
-	touchStartY = parseInt(touchObj.clientY); // get y position of touch point relative to left edge of browser
-	e.preventDefault();
+    var touchObj = e.changedTouches[0]; // reference first touch point
+    touchStartX = parseInt(touchObj.clientX); // get x position of touch point relative to left edge of browser
+    touchStartY = parseInt(touchObj.clientY); // get y position of touch point relative to left edge of browser
+    e.preventDefault();
 }
 function touchUp(e) {
-	window.touchDistX = 0;
-	window.touchDistY = 0;
-	e.preventDefault();
+    window.touchDistX = 0;
+    window.touchDistY = 0;
+    e.preventDefault();
 }
 function touchMove(e) {
-	var touchObj = e.changedTouches[0];
-	window.touchDistX = parseInt(touchObj.clientX) - touchStartX;
-	window.touchDistY = parseInt(touchObj.clientY) - touchStartY;
-	e.preventDefault();
+    var touchObj = e.changedTouches[0];
+    window.touchDistX = parseInt(touchObj.clientX) - touchStartX;
+    window.touchDistY = parseInt(touchObj.clientY) - touchStartY;
+    e.preventDefault();
 }
 

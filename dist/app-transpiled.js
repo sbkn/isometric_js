@@ -210,7 +210,10 @@ var Ghost = (function () {
 		this._sinceLastAnim = 0;
 	}
 
-	// Scaling factor - scale the pixmaps up
+	/**
+  * // Scaling factor - scale the pixmaps up
+  * @type {number}
+  */
 
 	_createClass(Ghost, [{
 		key: "movePx",
@@ -285,13 +288,23 @@ var Ghost = (function () {
 })();
 
 window.scalingFac = 2;
-// tilewidth & height of the default tile
+/**
+ *  tilewidth & height of the default tile
+ * @type {number}
+ */
 window.tileWidth = 64;
 window.tileHeight = 32;
-// Coord's of a click
+/**
+ * Coord's of a click
+ * @type {number}
+ */
 window.clickX = 0;
 window.clickY = 0;
-// Canvas
+
+/**
+ * Canvas
+ * @type {Element}
+ */
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
@@ -304,18 +317,24 @@ var test;
 // Images
 var iso_grid_spooky = new Image();
 var iso_obstacle_spooky_box_closed = new Image();
+var iso_highlighted_grid = new Image();
 var ghostImage = new Image();
 iso_grid_spooky.src = './Content/iso_grid_spooky.png';
 iso_obstacle_spooky_box_closed.src = './Content/iso_obstacle_spooky_box_closed.png';
+iso_highlighted_grid.src = './Content/iso_highlighted_grid.png';
 ghostImage.src = './Content/ghost_2.png';
 
-// Resize the canvas when needed
+/**
+ * Resize the canvas when needed
+ */
 function resizeCanvas() {
 	window.innerWidth <= 800 ? canvas.width = window.innerWidth : canvas.width = 800;
 	window.innerHeight <= 640 ? canvas.height = window.innerHeight : canvas.height = 640;
 }
 
-// Draw the terrain
+/**
+ * Draw the terrain
+ */
 function drawGround() {
 	var x = 0;
 	var y = 0;
@@ -333,8 +352,16 @@ function drawGround() {
 			}
 		}
 	}
+	ctx.drawImage(iso_highlighted_grid, window.pointerX, window.pointerY, 64 * window.scalingFac, 32 * window.scalingFac);
 }
-// Draw a number at (x,y)
+
+/**
+ * Draw a number at (x,y)
+ * @param title
+ * @param num
+ * @param x
+ * @param y
+ */
 function drawNumber(title, num, x, y) {
 	ctx.font = "16px Arial";
 	ctx.fillStyle = "#FA58FA";
@@ -423,6 +450,8 @@ var touchStartX = 0;
 var touchStartY = 0;
 window.touchDistX = 0;
 window.touchDistY = 0;
+window.pointerX = 0;
+window.pointerY = 0;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -478,8 +507,12 @@ function keyUpHandler(e) {
 
 function mouseMoveHandler(e) {
 	var relativeX = e.clientX - canvas.offsetLeft;
+	var relativeY = e.clientY - canvas.offsetTop;
 	if (relativeX > 0 && relativeX < canvas.width) {
-		//paddleX = relativeX - paddleWidth/2;
+		if (relativeY > 0 && relativeY < canvas.height) {
+			window.pointerX = relativeX;
+			window.pointerY = relativeY;
+		}
 	}
 }
 // Handle the touch events

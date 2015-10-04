@@ -115,7 +115,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-esdoc');
 		
 	// concat mycode, lint, transpile, concat with libs, concat css, minify
-	grunt.registerTask("build", ["concat:mycode", "babel", "concat:allcode", "concat:css", "uglify", "esdoc"]);
+	grunt.registerTask("build", ["concat:mycode", "babel", "concat:allcode", "concat:css", "uglify"]);
+    grunt.registerTask("release", ["concat:mycode", "babel", "concat:allcode", "concat:css", "uglify", "esdoc"]);
 
 	grunt.registerTask("default", ["build", "watch"]);
 };
