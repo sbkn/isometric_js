@@ -9,8 +9,6 @@ var touchStartX = 0;
 var touchStartY = 0;
 window.touchDistX = 0;
 window.touchDistY = 0;
-window.pointerX = 0;
-window.pointerY = 0;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -25,8 +23,6 @@ canvas.addEventListener("click", clickHandler, false);
 function clickHandler(e) {
     window.clickX = e.pageX - (window.innerWidth - canvas.width) / 2 - window.cam.x;
     window.clickY = e.pageY - window.cam.y;
-//	window.clickX = e.pageX - window.cam.x;
-//	window.clickY = e.pageY - window.cam.y;
 }
 
 function keyDownHandler(e) {
@@ -71,8 +67,9 @@ function mouseMoveHandler(e) {
     var relativeY = e.clientY - canvas.offsetTop;
     if (relativeX > 0 && relativeX < canvas.width) {
         if (relativeY > 0 && relativeY < canvas.height) {
-            window.pointerX = relativeX;
-            window.pointerY = relativeY;
+            window.mousePointer.pxX = relativeX;
+            window.mousePointer.pxY = relativeY;
+            window.mousePointer.pxToMat(relativeX, relativeY);
         }
     }
 }

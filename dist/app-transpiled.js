@@ -88,8 +88,8 @@ var Point = (function () {
 		key: "pxToMat",
 		value: function pxToMat(pxX, pxY) {
 			// I HAVE REMOVED THE TYPECAST RIGHT BEFORE THE FIRST, IT WAS A (INT) !!!!
-			this._matX = (pxX / (window.tileWidth / 2) + pxY / (window.tileHeight / 2)) / 2;
-			this._matY = (pxY / (window.tileHeight / 2) - pxX / (window.tileWidth / 2)) / 2;
+			this._matX = Math.floor((pxX / (window.tileWidth / 2) + pxY / (window.tileHeight / 2)) / 2);
+			this._matY = Math.floor((pxY / (window.tileHeight / 2) - pxX / (window.tileWidth / 2)) / 2);
 		}
 	}, {
 		key: "matX",
@@ -302,6 +302,12 @@ window.clickX = 0;
 window.clickY = 0;
 
 /**
+ * Where is the cursor atm?
+ * @type {Point}
+ */
+window.mousePointer = new Point(0, 0);
+
+/**
  * Canvas
  * @type {Element}
  */
@@ -352,7 +358,7 @@ function drawGround() {
 			}
 		}
 	}
-	ctx.drawImage(iso_highlighted_grid, window.pointerX, window.pointerY, 64 * window.scalingFac, 32 * window.scalingFac);
+	ctx.drawImage(iso_highlighted_grid, window.mousePointer.matX * 64, window.mousePointer.matY * 32, 64 * window.scalingFac, 32 * window.scalingFac);
 }
 
 /**
@@ -387,8 +393,8 @@ function draw() {
 	drawNumber("touchDistY: ", window.touchDistY, 8, 65);
 	drawNumber("timeDt: ", timeDt, 8, 85);
 	drawNumber("FPS: ", Math.floor(1000 / timeDt), 8, 105);
-	drawNumber("clickX: ", window.clickX, 8, 135);
-	drawNumber("clickY: ", window.clickY, 8, 155);
+	drawNumber("pointerMatX: ", window.mousePointer.matX, 8, 135);
+	drawNumber("pointerMatY: ", window.mousePointer.matY, 8, 155);
 	// Check for cam movement input
 	var dx = 0;
 	var dy = 0;
@@ -450,8 +456,6 @@ var touchStartX = 0;
 var touchStartY = 0;
 window.touchDistX = 0;
 window.touchDistY = 0;
-window.pointerX = 0;
-window.pointerY = 0;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -466,8 +470,6 @@ canvas.addEventListener("click", clickHandler, false);
 function clickHandler(e) {
 	window.clickX = e.pageX - (window.innerWidth - canvas.width) / 2 - window.cam.x;
 	window.clickY = e.pageY - window.cam.y;
-	//	window.clickX = e.pageX - window.cam.x;
-	//	window.clickY = e.pageY - window.cam.y;
 }
 
 function keyDownHandler(e) {
@@ -510,8 +512,9 @@ function mouseMoveHandler(e) {
 	var relativeY = e.clientY - canvas.offsetTop;
 	if (relativeX > 0 && relativeX < canvas.width) {
 		if (relativeY > 0 && relativeY < canvas.height) {
-			window.pointerX = relativeX;
-			window.pointerY = relativeY;
+			window.mousePointer.pxX = relativeX;
+			window.mousePointer.pxY = relativeY;
+			window.mousePointer.pxToMat(relativeX, relativeY);
 		}
 	}
 }

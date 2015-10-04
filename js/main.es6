@@ -17,6 +17,12 @@ window.clickX = 0;
 window.clickY = 0;
 
 /**
+ * Where is the cursor atm?
+ * @type {Point}
+ */
+window.mousePointer = new Point(0,0);
+
+/**
  * Canvas
  * @type {Element}
  */
@@ -67,7 +73,7 @@ function drawGround() {
 			}
 		}
 	}
-    ctx.drawImage(iso_highlighted_grid, window.pointerX, window.pointerY, 64*window.scalingFac, 32*window.scalingFac);
+    ctx.drawImage(iso_highlighted_grid, window.mousePointer.matX*64, window.mousePointer.matY*32, 64*window.scalingFac, 32*window.scalingFac);
 }
 
 /**
@@ -102,8 +108,8 @@ function draw() {
 	drawNumber( "touchDistY: ", window.touchDistY,8,65);
 	drawNumber( "timeDt: ", timeDt,8,85);
 	drawNumber( "FPS: ", Math.floor(1000/timeDt),8,105);
-	drawNumber( "clickX: ", window.clickX,8,135);
-	drawNumber( "clickY: ", window.clickY,8,155);
+	drawNumber( "pointerMatX: ", window.mousePointer.matX,8,135);
+	drawNumber( "pointerMatY: ", window.mousePointer.matY,8,155);
 	// Check for cam movement input
 	var dx = 0;
 	var dy = 0;

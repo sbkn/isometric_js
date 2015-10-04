@@ -42,8 +42,8 @@ class Point {
 	// px -> matrix
 	pxToMat(pxX, pxY) {
 		// I HAVE REMOVED THE TYPECAST RIGHT BEFORE THE FIRST, IT WAS A (INT) !!!!
-		this._matX = (pxX / (window.tileWidth / 2) + pxY / (window.tileHeight / 2)) / 2;
-		this._matY = (pxY / (window.tileHeight / 2) - pxX / (window.tileWidth / 2)) / 2;
+		this._matX = Math.floor((pxX / (window.tileWidth / 2) + pxY / (window.tileHeight / 2)) / 2);
+		this._matY = Math.floor((pxY / (window.tileHeight / 2) - pxX / (window.tileWidth / 2)) / 2);
 	}
 
 }
